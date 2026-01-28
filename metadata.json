@@ -1,0 +1,5 @@
+{
+  "name": "Summa Video Quiz Formulier",
+  "description": "Een interactief video-gebaseerd quizplatform voor studenten met geautomatiseerde beoordeling van open vragen en PDF-export.",
+  "requestFramePermissions": []
+}
