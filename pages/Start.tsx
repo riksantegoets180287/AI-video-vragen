@@ -15,8 +15,7 @@ const Start: React.FC<Props> = ({ onStart }) => {
     e.preventDefault();
     if (name && className) {
       onStart(name, className);
-      // Corrected flow: after start, go to video selection
-      navigate('/video-select');
+      navigate('/route-select');
     }
   };
 
@@ -56,7 +55,7 @@ const Start: React.FC<Props> = ({ onStart }) => {
             type="submit"
             className="w-full bg-summaIndigo text-white font-bold py-4 rounded-summa-inner hover:bg-summaBlue transition-colors shadow-lg active:scale-[0.98]"
           >
-            Kies jouw niveau
+            Doorgaan naar Niveau Keuze
           </button>
         </form>
       </div>

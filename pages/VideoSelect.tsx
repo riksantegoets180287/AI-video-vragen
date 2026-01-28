@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface Props {
   onSelect: (videoId: number) => void;
@@ -8,10 +8,21 @@ interface Props {
 
 const VideoSelect: React.FC<Props> = ({ onSelect }) => {
   const navigate = useNavigate();
+  const { videoId } = useParams<{ videoId: string }>();
+
+  useEffect(() => {
+    if (videoId) {
+      const id = parseInt(videoId, 10);
+      if (id >= 1 && id <= 5) {
+        onSelect(id);
+        navigate('/login');
+      }
+    }
+  }, [videoId, onSelect, navigate]);
 
   const handleSelect = (id: number) => {
     onSelect(id);
-    navigate('/route-select');
+    navigate(`/video/${id}`);
   };
 
   return (
