@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Start from './pages/Start';
+import VideoStart from './pages/VideoStart';
 import VideoSelect from './pages/VideoSelect';
 import RouteSelect from './pages/RouteSelect';
 import Quiz from './pages/Quiz';
@@ -45,8 +46,13 @@ const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleStart = (name: string, className: string) => {
-    setSession({ name, class: className, startTime: Date.now() });
+  const handleStart = (name: string, className: string, videoId?: number) => {
+    setSession({
+      name,
+      class: className,
+      startTime: Date.now(),
+      selectedVideo: videoId
+    });
   };
 
   const handleVideoSelect = (videoId: number) => {
@@ -74,7 +80,9 @@ const App: React.FC = () => {
       <div className="min-h-screen font-sans selection:bg-summaYellow selection:text-summaIndigo">
         <Routes>
           <Route path="/" element={<Start onStart={handleStart} />} />
-          
+
+          <Route path="/video/:videoId" element={<VideoStart onStart={handleStart} />} />
+
           <Route path="/video-select" element={
             session ? <VideoSelect onSelect={handleVideoSelect} /> : <Navigate to="/" />
           } />
