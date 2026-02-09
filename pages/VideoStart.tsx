@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 interface Props {
-  onStart: (name: string, className: string, videoId: number) => void;
+  onStart: (name: string, className: string, videoId?: number) => void;
 }
 
 const VideoStart: React.FC<Props> = ({ onStart }) => {
