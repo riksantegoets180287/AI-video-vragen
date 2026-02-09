@@ -45,12 +45,12 @@ const App: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const handleVideoSelect = (videoId: number) => {
-    setSession({ name: '', class: '', startTime: Date.now(), selectedVideo: videoId });
+  const handleStart = (name: string, className: string) => {
+    setSession({ name, class: className, startTime: Date.now() });
   };
 
-  const handleLogin = (name: string, className: string) => {
-    if (session) setSession({ ...session, name, class: className });
+  const handleVideoSelect = (videoId: number) => {
+    if (session) setSession({ ...session, selectedVideo: videoId });
   };
 
   const handleRouteSelect = (route: RouteType) => {
@@ -73,27 +73,26 @@ const App: React.FC = () => {
     <HashRouter>
       <div className="min-h-screen font-sans selection:bg-summaYellow selection:text-summaIndigo">
         <Routes>
-          <Route path="/" element={<VideoSelect onSelect={handleVideoSelect} />} />
-          <Route path="/video/:videoId" element={<VideoSelect onSelect={handleVideoSelect} />} />
-
-          <Route path="/login" element={
-            session?.selectedVideo ? <Start onStart={handleLogin} /> : <Navigate to="/" />
+          <Route path="/" element={<Start onStart={handleStart} />} />
+          
+          <Route path="/video-select" element={
+            session ? <VideoSelect onSelect={handleVideoSelect} /> : <Navigate to="/" />
           } />
 
           <Route path="/route-select" element={
-            session?.selectedVideo && session?.name ? <RouteSelect onSelect={handleRouteSelect} /> : <Navigate to="/" />
+            session?.selectedVideo ? <RouteSelect onSelect={handleRouteSelect} /> : <Navigate to="/" />
           } />
-
+          
           <Route path="/quiz" element={
             session?.selectedRoute ? <Quiz session={session} onFinish={handleQuizFinish} /> : <Navigate to="/" />
           } />
-
+          
           <Route path="/results" element={
             currentResult ? <Results result={currentResult} /> : <Navigate to="/" />
           } />
 
           <Route path="/admin-login" element={<AdminLogin onLogin={() => setIsAdmin(true)} />} />
-
+          
           <Route path="/admin" element={
             isAdmin || sessionStorage.getItem('admin_session') === 'active' ? <AdminDashboard /> : <Navigate to="/admin-login" />
           } />
