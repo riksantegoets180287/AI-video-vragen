@@ -12,27 +12,44 @@ export const exportToPdf = (result: QuizResult) => {
   doc.setFontSize(22);
   doc.setTextColor(32, 18, 110);
   doc.text('Video Quiz – Resultaat', margin, y);
-  
-  y += 15;
+
+  y += 12;
+
+  // Video Number Box
+  doc.setFillColor(32, 18, 110);
+  doc.roundedRect(margin, y, 40, 18, 3, 3, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(16);
+  doc.text(`Video ${result.videoId}`, margin + 20, y + 12, { align: 'center' });
+
+  // Participant Info
+  y += 25;
   doc.setFontSize(12);
   doc.setTextColor(51, 51, 51);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Deelnemer:', margin, y);
+  y += 7;
   doc.setFont('helvetica', 'normal');
-  doc.text(`Naam: ${result.userName}`, margin, y);
-  doc.text(`Klas: ${result.userClass}`, margin, y + 7);
-  doc.text(`Route: ${result.route.toUpperCase()}`, margin, y + 14);
-  doc.text(`Datum: ${result.date}`, margin, y + 21);
-  
+  doc.text(`Naam: ${result.userName}`, margin + 5, y);
+  doc.text(`Klas: ${result.userClass}`, margin + 5, y + 7);
+  doc.text(`Route: ${result.route.toUpperCase()}`, margin + 5, y + 14);
+  doc.text(`Datum: ${result.date}`, margin + 5, y + 21);
+
   y += 35;
   doc.setFont('helvetica', 'bold');
-  doc.text(`Titel: ${result.formTitle}`, margin, y);
+  doc.setFontSize(13);
+  doc.setTextColor(32, 18, 110);
+  doc.text(`Quiz Titel: ${result.formTitle}`, margin, y);
   y += 10;
   doc.setFontSize(10);
   doc.setTextColor(0, 100, 180);
+  doc.setFont('helvetica', 'normal');
   doc.text(`Video Bron: ${result.videoEmbed.substring(0, 50)}${result.videoEmbed.length > 50 ? '...' : ''}`, margin, y);
-  
+
   y += 15;
-  doc.setFontSize(14);
+  doc.setFontSize(16);
   doc.setTextColor(32, 18, 110);
+  doc.setFont('helvetica', 'bold');
   doc.text(`Totaalscore: ${result.totalScore} / ${result.maxTotalPoints}`, margin, y);
   
   y += 15;
@@ -65,6 +82,6 @@ export const exportToPdf = (result: QuizResult) => {
     y += 5;
   });
 
-  const filename = `VideoQuiz_${result.userClass}_${result.userName.replace(/\s+/g, '_')}_${result.route}_${result.date.replace(/[:\/]/g, '-')}.pdf`;
+  const filename = `VideoQuiz_Video${result.videoId}_${result.userClass}_${result.userName.replace(/\s+/g, '_')}_${result.route}_${result.date.replace(/[:\/]/g, '-')}.pdf`;
   doc.save(filename);
 };
