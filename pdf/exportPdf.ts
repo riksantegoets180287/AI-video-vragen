@@ -73,6 +73,23 @@ export const exportToPdf = (result: QuizResult) => {
     doc.setLineWidth(0.5);
     doc.roundedRect(margin, y, 170, 20, 2, 2, 'FD');
 
+    const isCorrect = q.score === q.maxPoints;
+    const checkmarkX = margin + 165;
+    const checkmarkY = y + 3;
+
+    doc.setFillColor(isCorrect ? 34 : 239, isCorrect ? 197 : 68, isCorrect ? 94 : 68);
+    doc.circle(checkmarkX, checkmarkY, 4, 'F');
+
+    doc.setDrawColor(255, 255, 255);
+    doc.setLineWidth(1.5);
+    if (isCorrect) {
+      doc.line(checkmarkX - 1.5, checkmarkY, checkmarkX - 0.5, checkmarkY + 1.5);
+      doc.line(checkmarkX - 0.5, checkmarkY + 1.5, checkmarkX + 2, checkmarkY - 2);
+    } else {
+      doc.line(checkmarkX - 2, checkmarkY - 2, checkmarkX + 2, checkmarkY + 2);
+      doc.line(checkmarkX - 2, checkmarkY + 2, checkmarkX + 2, checkmarkY - 2);
+    }
+
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(9);
     doc.setTextColor(29, 78, 216);
@@ -81,7 +98,7 @@ export const exportToPdf = (result: QuizResult) => {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(10);
     doc.setTextColor(51, 51, 51);
-    const userAnswerLines = doc.splitTextToSize(q.answer || '(Geen antwoord)', 164);
+    const userAnswerLines = doc.splitTextToSize(q.answer || '(Geen antwoord)', 155);
     doc.text(userAnswerLines, margin + 3, y + 10);
     y += Math.max(20, userAnswerLines.length * 5 + 10);
 

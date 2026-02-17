@@ -58,7 +58,21 @@ const Results: React.FC<Props> = ({ result }) => {
               </div>
 
               <div className="space-y-4">
-                <div className="border-2 border-blue-400 rounded-lg p-4 bg-blue-50">
+                <div className="border-2 border-blue-400 rounded-lg p-4 bg-blue-50 relative">
+                  <div className="absolute -top-3 -right-3 w-12 h-12 rounded-full flex items-center justify-center shadow-lg" style={{
+                    backgroundColor: r.score === r.maxPoints ? '#22c55e' : '#ef4444',
+                    transform: 'rotate(-15deg)'
+                  }}>
+                    {r.score === r.maxPoints ? (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    ) : (
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    )}
+                  </div>
                   <p className="text-xs text-blue-700 uppercase font-bold tracking-wider mb-2">Jouw antwoord</p>
                   <p className="text-summaDark font-medium">{r.answer || "(Geen antwoord)"}</p>
                 </div>
