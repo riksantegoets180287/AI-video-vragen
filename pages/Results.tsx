@@ -58,9 +58,14 @@ const Results: React.FC<Props> = ({ result }) => {
               </div>
 
               <div className="space-y-4">
-                <div>
-                  <p className="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Jouw antwoord</p>
-                  <p className="text-summaDark">{r.answer || "(Geen antwoord)"}</p>
+                <div className="border-2 border-blue-400 rounded-lg p-4 bg-blue-50">
+                  <p className="text-xs text-blue-700 uppercase font-bold tracking-wider mb-2">Jouw antwoord</p>
+                  <p className="text-summaDark font-medium">{r.answer || "(Geen antwoord)"}</p>
+                </div>
+
+                <div className="border-2 border-green-500 rounded-lg p-4 bg-green-50">
+                  <p className="text-xs text-green-700 uppercase font-bold tracking-wider mb-2">Goede antwoord</p>
+                  <p className="text-summaDark font-medium">{r.correctAnswer}</p>
                 </div>
 
                 {r.similarityScore !== undefined && (

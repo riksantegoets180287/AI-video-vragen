@@ -81,9 +81,11 @@ const Quiz: React.FC<Props> = ({ session, onFinish }) => {
       const answer = answers[q.id] || "";
       if (q.type === 'mcq') {
         const isCorrect = answer === q.correctOptionId;
+        const correctOption = q.options.find(o => o.id === q.correctOptionId);
         return {
           questionId: q.id,
           answer: q.options.find(o => o.id === answer)?.text || "Geen antwoord",
+          correctAnswer: correctOption?.text || "",
           score: isCorrect ? q.points : 0,
           maxPoints: q.points,
           isCorrect
@@ -97,6 +99,7 @@ const Quiz: React.FC<Props> = ({ session, onFinish }) => {
         return {
           questionId: q.id,
           answer,
+          correctAnswer: q.modelAnswer,
           score: Math.round(awardedPoints),
           maxPoints: q.points,
           similarityScore: sim.score,

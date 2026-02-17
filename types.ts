@@ -52,6 +52,7 @@ export interface UserSession {
 export interface QuestionResult {
   questionId: string;
   answer: string;
+  correctAnswer: string;
   score: number;
   maxPoints: number;
   similarityScore?: number;
