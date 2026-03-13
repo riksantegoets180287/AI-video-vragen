@@ -158,7 +158,7 @@ const Quiz: React.FC<Props> = ({ session, onFinish }) => {
 
         {/* Right Side: Paginated Question */}
         <div className="w-7/12 bg-white flex flex-col overflow-hidden relative">
-          <div className="flex-1 flex flex-col items-center justify-center p-12 lg:p-20">
+          <div className="flex-1 flex flex-col items-center justify-center p-12 lg:p-20 overflow-y-auto">
             <div className="w-full max-w-2xl space-y-10">
               <div className="flex items-start gap-6">
                  <span className="bg-summaIndigo text-white w-12 h-12 rounded-2xl flex items-center justify-center font-bold text-xl shadow-lg shrink-0">
